@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36109.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "piratetreasure.client", "piratetreasure.client\piratetreasure.client.esproj", "{2CE5B8F5-9A0D-6A80-59DD-CA5829AF7BCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PirateTreasure.Server", "PirateTreasure.Server\PirateTreasure.Server.csproj", "{8EE6DEFA-F8CC-42C9-8F0A-B83582CB29EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PirateTreasure.Infrastructure", "PirateTreasure.Infrastructure\PirateTreasure.Infrastructure.csproj", "{DEF638A1-EBA2-4DA3-9887-09408BB3C427}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PirateTreasure.Application", "PirateTreasure.Application\PirateTreasure.Application.csproj", "{08D8E137-6F7F-49B5-BD2C-21078ADBCFD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PirateTreasure.Domain", "PirateTreasure.Domain\PirateTreasure.Domain.csproj", "{D5BFD385-A2DE-40C8-8310-227FD863000A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CE5B8F5-9A0D-6A80-59DD-CA5829AF7BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CE5B8F5-9A0D-6A80-59DD-CA5829AF7BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CE5B8F5-9A0D-6A80-59DD-CA5829AF7BCC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2CE5B8F5-9A0D-6A80-59DD-CA5829AF7BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CE5B8F5-9A0D-6A80-59DD-CA5829AF7BCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CE5B8F5-9A0D-6A80-59DD-CA5829AF7BCC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8EE6DEFA-F8CC-42C9-8F0A-B83582CB29EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EE6DEFA-F8CC-42C9-8F0A-B83582CB29EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EE6DEFA-F8CC-42C9-8F0A-B83582CB29EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EE6DEFA-F8CC-42C9-8F0A-B83582CB29EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEF638A1-EBA2-4DA3-9887-09408BB3C427}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEF638A1-EBA2-4DA3-9887-09408BB3C427}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEF638A1-EBA2-4DA3-9887-09408BB3C427}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEF638A1-EBA2-4DA3-9887-09408BB3C427}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08D8E137-6F7F-49B5-BD2C-21078ADBCFD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08D8E137-6F7F-49B5-BD2C-21078ADBCFD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08D8E137-6F7F-49B5-BD2C-21078ADBCFD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08D8E137-6F7F-49B5-BD2C-21078ADBCFD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5BFD385-A2DE-40C8-8310-227FD863000A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5BFD385-A2DE-40C8-8310-227FD863000A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5BFD385-A2DE-40C8-8310-227FD863000A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5BFD385-A2DE-40C8-8310-227FD863000A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {992A14A4-5EE9-45CA-B248-B2F6D34B4347}
+	EndGlobalSection
+EndGlobal

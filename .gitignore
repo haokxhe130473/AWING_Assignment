@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/PirateTreasure/.vs/PirateTreasure
+/PirateTreasure/PirateTreasure.Application/obj
+/PirateTreasure/PirateTreasure.Domain/obj
+/PirateTreasure/PirateTreasure.Infrastructure/obj
+/PirateTreasure/PirateTreasure.Server/obj
