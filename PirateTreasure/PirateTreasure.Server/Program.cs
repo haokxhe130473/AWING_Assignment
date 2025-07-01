@@ -14,6 +14,10 @@ builder.Services.AddSwaggerGen();
 builder.Services
     .AddApplication()
     .AddInfrastructure(builder.Configuration);
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(PirateTreasure.Application.AssemblyReference.Assembly);
+});
 
 var app = builder.Build();
 

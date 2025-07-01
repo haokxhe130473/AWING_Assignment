@@ -16,7 +16,11 @@ namespace PirateTreasure.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            modelBuilder.Entity<TreasureMap>()
+            .HasMany(m => m.Cells)
+            .WithOne()
+            .HasForeignKey(c => c.TreasureMapId)
+            .OnDelete(DeleteBehavior.Cascade);
             // Apply Fluent Configuration
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
         }
