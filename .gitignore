@@ -7,3 +7,8 @@
 /PirateTreasure/PirateTreasure.Domain/obj
 /PirateTreasure/PirateTreasure.Infrastructure/obj
 /PirateTreasure/PirateTreasure.Server/obj
+/PirateTreasure/PirateTreasure.Application/bin/Debug/net8.0
+/PirateTreasure/piratetreasure.client/obj/Debug
+/PirateTreasure/PirateTreasure.Domain/bin/Debug/net8.0
+/PirateTreasure/PirateTreasure.Infrastructure/bin/Debug/net8.0
+/PirateTreasure/PirateTreasure.Server/bin/Debug/net8.0
