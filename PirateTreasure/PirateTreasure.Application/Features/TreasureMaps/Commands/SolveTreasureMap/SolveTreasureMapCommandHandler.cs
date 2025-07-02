@@ -1,10 +1,5 @@
 ﻿using MediatR;
 using PirateTreasure.Application.Contracts.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PirateTreasure.Application.Features.TreasureMaps.Commands.SolveTreasureMap
 {
@@ -25,17 +20,15 @@ namespace PirateTreasure.Application.Features.TreasureMaps.Commands.SolveTreasur
 
             int p = map.MaxChestValue;
 
-            // Group cells by chest value
             var chestGroups = new Dictionary<int, List<(int row, int col)>>();
             foreach (var cell in map.Cells)
             {
                 if (!chestGroups.ContainsKey(cell.ChestValue))
                     chestGroups[cell.ChestValue] = new List<(int, int)>();
 
-                chestGroups[cell.ChestValue].Add((cell.Row - 1, cell.Col - 1)); // -1 for 0-based indexing
+                chestGroups[cell.ChestValue].Add((cell.Row - 1, cell.Col - 1));
             }
 
-            // Special case for chest 1: start from (0,0) to all chests with value 1
             var distance = new double[map.Rows, map.Columns];
             for (int i = 0; i < map.Rows; i++)
                 for (int j = 0; j < map.Columns; j++)
@@ -61,7 +54,6 @@ namespace PirateTreasure.Application.Features.TreasureMaps.Commands.SolveTreasur
                 distance[target.row, target.col] = min;
             }
 
-            // Go from chest 2 to chest p
             for (int value = 2; value <= p; value++)
             {
                 if (!chestGroups.ContainsKey(value))
@@ -94,7 +86,7 @@ namespace PirateTreasure.Application.Features.TreasureMaps.Commands.SolveTreasur
             var lastChest = chestGroups[p];
             double result = lastChest.Min(c => distance[c.row, c.col]);
 
-            return Math.Round(result, 6); 
+            return Math.Round(result, 6);
         }
 
         private double GetDistance(int x1, int y1, int x2, int y2)
