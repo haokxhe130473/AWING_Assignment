@@ -8,7 +8,7 @@ using PirateTreasure.Application.Features.TreasureMaps.Queries.GetTreasureMap;
 namespace PirateTreasure.Server.Controllers
 {
     [ApiController]
-    [Route("api/treasure-map")]
+    [Route("api/treasure-maps")]
     public class TreasureMapController : ControllerBase
     {
         private readonly IMediator _mediator;

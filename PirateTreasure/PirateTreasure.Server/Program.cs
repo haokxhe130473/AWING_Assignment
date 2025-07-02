@@ -18,8 +18,18 @@ builder.Services.AddMediatR(cfg =>
 {
     cfg.RegisterServicesFromAssembly(PirateTreasure.Application.AssemblyReference.Assembly);
 });
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("*")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 var app = builder.Build();
+app.UseCors("AllowFrontend");
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
