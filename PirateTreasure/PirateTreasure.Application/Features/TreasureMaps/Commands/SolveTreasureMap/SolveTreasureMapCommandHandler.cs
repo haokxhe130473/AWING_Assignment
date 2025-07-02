@@ -94,7 +94,7 @@ namespace PirateTreasure.Application.Features.TreasureMaps.Commands.SolveTreasur
             var lastChest = chestGroups[p];
             double result = lastChest.Min(c => distance[c.row, c.col]);
 
-            return Math.Round(result, 6); // bạn có thể làm tròn đến 2 chữ số nếu muốn
+            return Math.Round(result, 6); 
         }
 
         private double GetDistance(int x1, int y1, int x2, int y2)
