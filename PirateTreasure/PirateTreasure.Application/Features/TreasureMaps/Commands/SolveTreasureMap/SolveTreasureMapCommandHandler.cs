@@ -16,10 +16,27 @@ namespace PirateTreasure.Application.Features.TreasureMaps.Commands.SolveTreasur
         {
             var map = await _treasureMapRepository.GetByIdAsync(request.TreasureMapId);
             if (map == null || map.Cells.Count == 0)
-                throw new InvalidOperationException("Map not found or empty.");
+                throw new InvalidOperationException("Bản đồ không tồn tại hoặc không có dữ liệu.");
 
             int p = map.MaxChestValue;
 
+            var chestValues = map.Cells.Select(c => c.ChestValue).ToList();
+
+            if (chestValues.Any(val => val < 1 || val > p))
+                throw new InvalidOperationException($"Rương chỉ được phép có giá trị từ 1 đến {p}.");
+
+            var requiredValues = Enumerable.Range(1, p);
+            var existingValues = chestValues.ToHashSet();
+            var missing = requiredValues.Where(v => !existingValues.Contains(v)).ToList();
+
+            if (missing.Any())
+                throw new InvalidOperationException($"Thiếu các rương: {string.Join(", ", missing)}.");
+
+            var startCell = map.Cells.FirstOrDefault(c => c.Row == 1 && c.Col == 1);
+            if (startCell == null || startCell.ChestValue != 1)
+                throw new InvalidOperationException("Ô (1,1) phải chứa rương số 1 để bắt đầu hành trình.");
+
+            // Gom nhóm các vị trí theo số rương
             var chestGroups = new Dictionary<int, List<(int row, int col)>>();
             foreach (var cell in map.Cells)
             {
@@ -36,18 +53,14 @@ namespace PirateTreasure.Application.Features.TreasureMaps.Commands.SolveTreasur
 
             distance[0, 0] = 0;
 
-            if (!chestGroups.ContainsKey(1))
-                throw new InvalidOperationException("No chest with value 1 exists on map.");
-
-            var queue = new List<(int row, int col, double cost)>
-            { (0, 0, 0) };
+            var queue = new List<(int row, int col, double cost)> { (0, 0, 0) };
 
             foreach (var target in chestGroups[1])
             {
                 double min = double.MaxValue;
                 foreach (var source in queue)
                 {
-                    var cost = GetDistance(source.row, source.col, target.row, target.col) + source.cost;
+                    double cost = GetDistance(source.row, source.col, target.row, target.col) + source.cost;
                     min = Math.Min(min, cost);
                 }
 
@@ -56,9 +69,6 @@ namespace PirateTreasure.Application.Features.TreasureMaps.Commands.SolveTreasur
 
             for (int value = 2; value <= p; value++)
             {
-                if (!chestGroups.ContainsKey(value))
-                    throw new InvalidOperationException($"Missing chest value {value}");
-
                 var prevPositions = chestGroups[value - 1];
                 var currPositions = chestGroups[value];
 
@@ -73,7 +83,7 @@ namespace PirateTreasure.Application.Features.TreasureMaps.Commands.SolveTreasur
 
                     foreach (var source in prevPositions)
                     {
-                        var cost = GetDistance(source.row, source.col, target.row, target.col) + distance[source.row, source.col];
+                        double cost = GetDistance(source.row, source.col, target.row, target.col) + distance[source.row, source.col];
                         min = Math.Min(min, cost);
                     }
 

@@ -38,23 +38,55 @@ const CreateTreasureMap: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    // Validation
-    if (matrix[0][0] !== 1) {
-      setError("Rương tại ô (1,1) phải có giá trị 1 để bắt đầu hành trình.");
-      return;
-    }
-
+    // Validate cơ bản
     if (!name.trim()) {
       setError("Tên bản đồ không được để trống.");
       return;
     }
 
-    const flatCells = matrix.flat().map((v) => parseInt(`${v}`, 10));
-    if (flatCells.some((v) => isNaN(v) || v < 1 || v > maxChestValue)) {
-      setError(`Giá trị rương phải nằm trong khoảng 1 đến ${maxChestValue}.`);
+    if (rows <= 0 || cols <= 0 || maxChestValue <= 0) {
+      setError("Số hàng, số cột và p phải lớn hơn 0.");
       return;
     }
 
+    if (maxChestValue > rows * cols) {
+      setError("Giá trị p không được lớn hơn tổng số ô.");
+      return;
+    }
+
+    if (matrix.length !== rows || matrix.some((r) => r.length !== cols)) {
+      setError("Số ô không khớp với kích thước bản đồ.");
+      return;
+    }
+
+    // Validate giá trị các ô
+    const flatCells = matrix.flat().map((v) => parseInt(`${v}`, 10));
+    if (flatCells.some((v) => isNaN(v) || v < 1 || v > maxChestValue)) {
+      setError(
+        `Tất cả rương phải có giá trị trong khoảng 1 đến ${maxChestValue}.`
+      );
+      return;
+    }
+
+    // Validate phải có đủ rương từ 1 đến p
+    const chestSet = new Set(flatCells);
+    const missing: number[] = [];
+    for (let i = 1; i <= maxChestValue; i++) {
+      if (!chestSet.has(i)) missing.push(i);
+    }
+
+    if (missing.length > 0) {
+      setError(`Thiếu các rương số: ${missing.join(", ")}.`);
+      return;
+    }
+
+    // Ô (1,1) phải là 1
+    if (matrix[0][0] !== 1) {
+      setError("Ô (1,1) phải chứa rương số 1 để bắt đầu hành trình.");
+      return;
+    }
+
+    // OK - submit
     try {
       const cells = matrix.flatMap((row, rIdx) =>
         row.map((val, cIdx) => ({
@@ -74,6 +106,7 @@ const CreateTreasureMap: React.FC = () => {
 
       const id = await createTreasureMap(data);
       setSuccess(`Bản đồ đã lưu với ID: ${id}`);
+      setError(null);
     } catch {
       setError("Lỗi khi tạo bản đồ.");
     }
